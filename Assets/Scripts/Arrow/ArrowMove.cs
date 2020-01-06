@@ -11,6 +11,7 @@ public class ArrowMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        ScoreManager.CScore += 10;
         if (collision.gameObject.tag.Equals("Respawn"))
         {
             if (this.gameObject.tag.Equals("Item"))
@@ -22,9 +23,10 @@ public class ArrowMove : MonoBehaviour
             if (fArrowSpeed >= 5)
                 AudioManager.Instance.RandomSoundEffect(AudioManager.Instance.RainCol);
             GameObject Instance = Instantiate(DropEffectPref, gameObject.transform.position, transform.rotation) as GameObject;
+            AudioManager.Instance.RandomSoundEffect(AudioManager.Instance.RainCol);
             Destroy(Instance, 0.7f);
             Destroy(gameObject);
-            
+
         }
     }
 
