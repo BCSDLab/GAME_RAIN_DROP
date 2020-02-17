@@ -15,9 +15,9 @@ public class ArrowChangeSpeedMove : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Respawn"))
         {
-            if (fArrowSpeed >= 5)
-                AudioManager.Instance.RandomSoundEffect(AudioManager.Instance.RainCol);
+            ScoreManager.CScore += 25;
             GameObject Instance = Instantiate(DropEffectPref, gameObject.transform.position, transform.rotation) as GameObject;
+            AudioManager.Instance.RandomSoundEffect(AudioManager.Instance.RainCol);
             Destroy(Instance, 0.7f);
             Destroy(gameObject);
         }
