@@ -51,7 +51,14 @@ public class ScoreManager : MonoBehaviour
     public void ScoreUpdate()
     {
         scoreLabel.text = CScore.ToString();
+        currentScore.color = new Color(255, 255, 255, 255);
         currentScore.text = CScore.ToString();
-        BestScore.text = PlayerPrefs.GetFloat("BEST", 0).ToString("N0");
+        BestScore.text = PlayerPrefs.GetFloat("BEST", 0).ToString();
+        BestScore.color = new Color(255, 255, 255, 255);
+    }
+
+    public void ResetScrore()
+    {
+        CScore = 0;
     }
 }
