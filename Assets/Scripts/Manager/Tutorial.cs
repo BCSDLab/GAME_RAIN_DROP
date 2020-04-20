@@ -92,6 +92,7 @@ public class Tutorial : MonoBehaviour
 
     public void NextButton()
     {
+        ScoreManager.Instance.ResetScrore();
         GameManager.Instance.IsTutorial = true;
         TutorialCheck = true;
         if(GoDestory != null && GoDestory.name != "Check1(Clone)")
@@ -288,11 +289,13 @@ public class Tutorial : MonoBehaviour
 
     void LastTutorial()
     {
-        TutorialText2.text = "튜토리얼을 끝났습니다. 직접 플레이 보세요!!";
+        TutorialText2.text = "튜토리얼이 끝났습니다. 직접 플레이 보세요!!";
         TutorialPanel2.active = true;
         GameManager.Instance.IsTutorial = false;
         TutorialCheck = false;
         tutorialStep++;
+        GPGSManager.Instance.OnAchievement_1();
+        UIManager.Instance.StartBnt();
     }
 
     public void DestoryTarget()
@@ -337,7 +340,7 @@ public class Tutorial : MonoBehaviour
         {
             if (!tempbool)
             {
-                if (Vector3.Distance(Target.transform.position, Zer0) < 3.5f)
+                if (Vector3.Distance(Target.transform.position, Zer0) < 4.0f)
                 {
                     NormalArrowDestory();
                     return;
@@ -356,7 +359,7 @@ public class Tutorial : MonoBehaviour
         {
             if (!tempbool)
             {
-                if (Vector3.Distance(Target.transform.position, Zer0) < 3.5f)
+                if (Vector3.Distance(Target.transform.position, Zer0) < 4.0f)
                 {
                     RoundArrowDestory();
                     return;
@@ -374,7 +377,7 @@ public class Tutorial : MonoBehaviour
         {
             if (!tempbool)
             {
-                if (Vector3.Distance(Target.transform.position, Zer0) < 3.5f)
+                if (Vector3.Distance(Target.transform.position, Zer0) < 4.0f)
                 {
                     PositionArrowDestory();
                     return;

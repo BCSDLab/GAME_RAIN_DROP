@@ -37,23 +37,24 @@ public class Player : MonoBehaviour
     public float fMaxHp = 3f;
     public bool IsTracking = false;
 
+    private static bool is_tutorial = true;
     private void OnTriggerEnter2D(Collider2D col)
     {
-     
+
         if (col.gameObject.tag == "Arrow")
         {
             if (fHp > 0)
             {
                 HPBar.transform.GetChild((int)fHp).gameObject.active = false;
             }
-            fHp--;
+
+            if (!is_tutorial)
+                fHp--;
             Destroy(col.gameObject);
         }
         if (col.gameObject.tag.Equals("Item"))
         {
             BoomCount++;
-            //GameObject instance = (GameObject)Instantiate(UmbrellaEffectPref, new Vector3(UmbrellaBtn.transform.position.x, UmbrellaBtn.transform.position.y, 10f), UmbrellaBtn.transform.rotation);
-            //Destroy(instance, 4f);
             Destroy(col.gameObject);
         }
         if (col.gameObject.name.Equals("Heal"))
@@ -68,7 +69,7 @@ public class Player : MonoBehaviour
         if (ScoreManager.CScore >= PlayerPrefs.GetFloat("BEST", 0))
         {
             PlayerPrefs.SetFloat("BEST", ScoreManager.CScore);
-            Social.Active.ReportScore(ScoreManager.CScore * 1, GPGSIds.leaderboard_readerboard, bSuccess =>
+            Social.Active.ReportScore(ScoreManager.CScore * 1, GPGSIds.leaderboard_leaderboard, bSuccess =>
             {
                 if (bSuccess)
                 {
@@ -261,5 +262,10 @@ public class Player : MonoBehaviour
             MovePositionLeft();
         }
         else MoveIdleAnimation();
+    }
+
+    public static void setTutorial(bool is_tt)
+    {
+       is_tutorial = is_tt;
     }
 }

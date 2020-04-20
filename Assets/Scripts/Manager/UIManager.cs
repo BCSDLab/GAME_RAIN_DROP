@@ -22,10 +22,10 @@ public class UIManager : MonoBehaviour
     private float UI_duration = 0.5f;
 
     //  Main UI
-    public RectTransform title, start, option, login, leaderboard;
+    public RectTransform title, start, option, login, leaderboard, shop;
 
     // Tutorial UI
-    public RectTransform tutorialPanel, tutorialbtn,tutorialSkip;
+    public RectTransform tutorialPanel, shopbtn, tutorialbtn, tutorialSkip;
     public GameObject TutorialMangaer;
     public GameObject EffectArea;
     public GameObject player;
@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour
 
     //  Pause UI 
     public RectTransform ps_panel;
+    public RectTransform Tutorial_home;
 
     //  Result UI
     public RectTransform rs_panel, retry, home;
@@ -63,10 +64,19 @@ public class UIManager : MonoBehaviour
 
     public void StartBnt()
     {
-        CloseMain();
-        OpenIngame();
-        GameManager.Instance.IsStart = false;
-        GameManager.Instance.IsInGame = true;
+        if (PlayerPrefs.GetInt("INIT", 0) == 0)
+        {
+            TutorialBnt();
+            PlayerPrefs.SetInt("INIT", 1);
+        }
+        else
+        {
+            CloseMain();
+            OpenIngame();
+            Player.setTutorial(false);
+            GameManager.Instance.IsStart = false;
+            GameManager.Instance.IsInGame = true;
+        }
     }
 
     public void TutorialBnt()
@@ -106,6 +116,17 @@ public class UIManager : MonoBehaviour
         OpenPause();
         GameManager.Instance.IsInGame = false;
         GameManager.Instance.IsPause = true;
+    }
+    public void ShopBnt()
+    {
+        CloseMain();
+        OpenShop();
+    }
+
+    public void ShopCloseBnt()
+    {
+        OpenMenu();
+        CloseShop();
     }
 
     public void ContinueBnt()
@@ -196,20 +217,40 @@ public class UIManager : MonoBehaviour
         leaderboard.DOAnchorPos(new Vector2(850, -600), UI_duration);
         start.gameObject.SetActive(false);
         option.DOAnchorPos(new Vector2(855, 620), UI_duration);
-        tutorialbtn.DOAnchorPos(new Vector2(-855, -620), UI_duration);
+        shopbtn.DOAnchorPos(new Vector2(-855, -620), UI_duration);
+        
     }
+    void OpenShop()
+    {
+        title.DOAnchorPos(new Vector2(0, 660), UI_duration);
+        leaderboard.DOAnchorPos(new Vector2(850, -600), UI_duration);
+        start.gameObject.SetActive(false);
+        shop.DOAnchorPos(new Vector2(0, 0), UI_duration);
+        shopbtn.DOAnchorPos(new Vector2(-855, -620), UI_duration);
 
+    }
+    void CloseShop()
+    {
+        title.DOAnchorPos(new Vector2(0, 300), UI_duration);
+        leaderboard.DOAnchorPos(new Vector2(850, -430), UI_duration);
+        start.gameObject.SetActive(true);
+        shop.DOAnchorPos(new Vector2(0, -1000), UI_duration);
+        shopbtn.DOAnchorPos(new Vector2(-855, -420), UI_duration);
+
+    }
     void OpenMenu()
     {
         title.DOAnchorPos(new Vector2(0, 300), UI_duration);
         leaderboard.DOAnchorPos(new Vector2(850, -430), UI_duration);
         start.gameObject.SetActive(true);
         option.DOAnchorPos(new Vector2(855, 435), UI_duration);
-        tutorialbtn.DOAnchorPos(new Vector2(-855, -420), UI_duration);
+        shopbtn.DOAnchorPos(new Vector2(-855, -420), UI_duration);
+        Tutorial_home.DOAnchorPos(new Vector2(855, 620), UI_duration);
     }
 
     void OpenTutorial()
     {
+        Player.setTutorial(true);
         EffectArea.SetActive(true);
         TutorialMangaer.gameObject.SetActive(true);
         tutorialPanel.DOAnchorPos(new Vector2(0, 0), UI_duration);
@@ -219,6 +260,7 @@ public class UIManager : MonoBehaviour
         score.DOAnchorPos(new Vector2(-860, 495), UI_duration);
         level.DOAnchorPos(new Vector2(-889, 423), UI_duration);
         leveltext.DOAnchorPos(new Vector2(-788, 423), UI_duration);
+        Tutorial_home.DOAnchorPos(new Vector2(855, 435), UI_duration);
     }
 
     void CloseTutorial()
@@ -226,6 +268,7 @@ public class UIManager : MonoBehaviour
         tutorialPanel.DOAnchorPos(new Vector2(0,1200), UI_duration);
         tutorialbtn.DOAnchorPos(new Vector2(-834, -430), UI_duration);
         tutorialSkip.DOAnchorPos(new Vector2(855, 620), UI_duration);
+        Tutorial_home.DOAnchorPos(new Vector2(855, 620), UI_duration);
     }
 
     void OpenOption()
@@ -249,6 +292,7 @@ public class UIManager : MonoBehaviour
         pause.DOAnchorPos(new Vector2(855, 435), UI_duration);
         level.DOAnchorPos(new Vector2(-889, 423), UI_duration);
         leveltext.DOAnchorPos(new Vector2(-788, 423), UI_duration);
+        Tutorial_home.DOAnchorPos(new Vector2(855, 620), UI_duration);
     }
 
     void CloseIngame()
@@ -284,5 +328,4 @@ public class UIManager : MonoBehaviour
         retry.DOAnchorPos(new Vector2(-275, -600), UI_duration);
         home.DOAnchorPos(new Vector2(275, -600), UI_duration);
     }
-   
 }

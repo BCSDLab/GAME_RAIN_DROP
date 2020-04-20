@@ -47,7 +47,7 @@ public class GPGSManager : MonoBehaviour
         Initialize(true);
         if (_authenticating == false)
             Login();
-        
+
     }
     // 로그인
     public void Login()
@@ -101,6 +101,25 @@ public class GPGSManager : MonoBehaviour
                 }
             });
         }
+    }
+    public void ShowAchievement()
+    {
+        Social.ShowAchievementsUI();
+    }
+    public void OnAchievement_1()
+    {
+        Social.ReportProgress(GPGSIds.achievement, 100.0f, (bool success) =>
+        {
+            if (success)
+            {
+                Debug.Log("초보 탈출 획득 성공");
+                PlayGamesPlatform.Instance.IncrementAchievement(GPGSIds.achievement_3, 1, null);
+            }
+            else
+            {
+                Debug.Log("초보 탈출 획득 실패");
+            }
+        });
     }
 }
 
