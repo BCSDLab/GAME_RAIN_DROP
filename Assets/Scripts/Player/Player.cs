@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         if (ScoreManager.CScore >= PlayerPrefs.GetFloat("BEST", 0))
         {
             PlayerPrefs.SetFloat("BEST", ScoreManager.CScore);
-            Social.Active.ReportScore(ScoreManager.CScore * 1, GPGSIds.leaderboard_readerboard, bSuccess =>
+            Social.Active.ReportScore(ScoreManager.CScore * 1, GPGSIds.leaderboard_leaderboard, bSuccess =>
             {
                 if (bSuccess)
                 {

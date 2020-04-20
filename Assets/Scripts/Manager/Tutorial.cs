@@ -294,6 +294,7 @@ public class Tutorial : MonoBehaviour
         GameManager.Instance.IsTutorial = false;
         TutorialCheck = false;
         tutorialStep++;
+        GPGSManager.Instance.OnAchievement_1();
         UIManager.Instance.StartBnt();
     }
 
