@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     private UIManager mUIManager;
     public GameObject ArrowBoard = null;
     public Text BombText;
-    public static int BoomCount = 0;
+    public static int BoomCount = 3;
     public GameObject BombEffect;
     public GameObject UmbrellaBtn;
     public GameObject UmbrellaEffectPref;
@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     private float fAnimationAngle = 0;
 
-    public float fHp;
+    public static float fHp;
     public float fMaxHp = 3f;
     public bool IsTracking = false;
 
@@ -47,8 +47,6 @@ public class Player : MonoBehaviour
                 HPBar.transform.GetChild((int)fHp).gameObject.active = false;
             }
             fHp--;
-            if(!AudioManager.Instance.Vib)
-                Handheld.Vibrate();
             Destroy(col.gameObject);
         }
         if (col.gameObject.tag.Equals("Item"))
@@ -222,7 +220,7 @@ public class Player : MonoBehaviour
 
     public void PlayerReset()
     {
-        BoomCount = 0;
+        BoomCount = 3;
         fHp = fMaxHp;
         HPBar.transform.GetChild((int)1).gameObject.active = true;
         HPBar.transform.GetChild((int)2).gameObject.active = true;

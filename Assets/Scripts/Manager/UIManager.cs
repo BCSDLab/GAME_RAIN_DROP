@@ -73,7 +73,6 @@ public class UIManager : MonoBehaviour
     {
         CloseMain();
         OpenTutorial();
-        OpenIngame();
         GameManager.Instance.TutorialStart();
     }
     
@@ -215,6 +214,11 @@ public class UIManager : MonoBehaviour
         TutorialMangaer.gameObject.SetActive(true);
         tutorialPanel.DOAnchorPos(new Vector2(0, 0), UI_duration);
         tutorialbtn.DOAnchorPos(new Vector2(-834, -620), UI_duration);
+        hpbar.DOAnchorPos(new Vector2(0, 0), UI_duration);
+        bomb.DOAnchorPos(new Vector2(850, -450), UI_duration);
+        score.DOAnchorPos(new Vector2(-860, 495), UI_duration);
+        level.DOAnchorPos(new Vector2(-889, 423), UI_duration);
+        leveltext.DOAnchorPos(new Vector2(-788, 423), UI_duration);
     }
 
     void CloseTutorial()

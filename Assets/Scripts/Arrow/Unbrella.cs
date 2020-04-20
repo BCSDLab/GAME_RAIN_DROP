@@ -13,6 +13,7 @@ public class Unbrella : MonoBehaviour
     public GameObject Player;
     public Player m_CPlayer;
     private Animator animator;
+    public float m_invoke_time = 5.0f;
   
     public float GetAngle(Vector3 vStart, Vector3 vEnd)
     {
@@ -28,7 +29,8 @@ public class Unbrella : MonoBehaviour
     public void UmbrellaOpen()
     {
         animator.speed = 1f;
-        Invoke("StopAnimation", 5f);
+        m_invoke_time = 5.0f;
+        Invoke("StopAnimation", m_invoke_time);
     }
 
     private void UmbrellaIdle()

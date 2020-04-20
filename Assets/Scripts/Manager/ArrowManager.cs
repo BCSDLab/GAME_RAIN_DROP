@@ -71,7 +71,6 @@ public class ArrowManager : MonoBehaviour
         float random = Random.Range(0, 100);
         float x = radius * Mathf.Cos(random);
         float y = radius * Mathf.Sin(random);
-        ScoreManager.CScore++;
         try
         {
             GameObject instance = Instantiate(RandomArrow(), new Vector3(x, y, 0f), Quaternion.identity);
